@@ -1,18 +1,15 @@
-const Post = require('../models/Post')
-const sharp = require('sharp')
-const path = require('path')
-const fs = require('fs')
+const Post = require('../models/Post');
 
 module.exports = {
-    async store(req, res) {
-        const post = await Post.findById(req.params.id)
+  async store(req, res) {
+    const post = await Post.findById(req.params.id);
 
-        post.likes += 1
+    post.likes += 1;
 
-        await post.save()
+    await post.save();
 
-        req.io.emit('like', post)
+    req.io.emit('like', post);
 
-        return res.json(post)
-    }
-}
+    return res.json(post);
+  },
+};
